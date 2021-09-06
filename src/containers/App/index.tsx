@@ -2,16 +2,13 @@ import React, { Component } from 'react'
 import { Router, Switch, Route } from 'react-router'
 import PrivateRoute from 'components/PrivateRoute'
 import { Provider } from 'mobx-react'
-
 import history from 'utils/history'
-
 import AppLoading from 'components/AppLoading'
 import Public from '../Public'
 import Admin from '../Admin'
-
 import store from 'stores'
-
 import * as userActions from 'actions/users'
+import SearchForm from '../../containers/SearchForm'
 
 class App extends Component {
   state = {
@@ -39,7 +36,8 @@ class App extends Component {
           <Router history={history}>
             <Switch>
               <PrivateRoute roles={['admin']} path="/admin" component={Admin} />
-              <Route path="/" component={Public} />
+              {/* <Route path="/" component={Public} /> */}
+              <Route path="/" component={SearchForm} />
             </Switch>
           </Router>
         ) : (
