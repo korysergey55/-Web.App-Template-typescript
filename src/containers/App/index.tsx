@@ -8,7 +8,8 @@ import Public from '../Public'
 import Admin from '../Admin'
 import store from 'stores'
 import * as userActions from 'actions/users'
-import SearchForm from '../../containers/SearchForm'
+import SearchForm from '../../containers/SearchForm/index'
+import WeatherList from '../../containers/WeatherList/index'
 
 class App extends Component {
   state = {
@@ -38,6 +39,7 @@ class App extends Component {
               <PrivateRoute roles={['admin']} path="/admin" component={Admin} />
               {/* <Route path="/" component={Public} /> */}
               <Route path="/" component={SearchForm} />
+              <Route path="/list" component={WeatherList} />
             </Switch>
           </Router>
         ) : (

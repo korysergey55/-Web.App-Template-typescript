@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import styles from './styles.module.scss'
-// import{ getCurrentWeather} from '../../actions/api'
+import Weather from '../../stores/Weather'
+import { Select } from 'antd'
+const { Option } = Select
 
 class SearchForm extends Component {
   state = {
     sity: '',
-    country: '',
+    language: '',
   }
   onHandleChange = (evt: { target: { name: any; value: any } }) => {
     this.setState({
@@ -14,7 +16,8 @@ class SearchForm extends Component {
   }
   handleSubmitForm = (evt: { preventDefault: () => void }) => {
     evt.preventDefault()
-    // getCurrentWeather(this.state.sity)
+    // Weather.sity(this.state.sity)
+    // Weather.fetchForecast(this.state.sity)
   }
   render = () => {
     return (
@@ -32,16 +35,33 @@ class SearchForm extends Component {
             <button type="submit" className={styles.buttonSubmit}>
               Add
             </button>
-            <select
+            {/* <select
               className={styles.inputSelect}
               name="country"
-              value={this.state.country}
+              value={this.state.language}
               onChange={this.onHandleChange}
             >
-              {/* <option value="en" name="country">EN</option>
-              <option value="ua" name="country">UA</option>
-              <option value="ru" name="country">RU</option> */}
-            </select>
+              <option value="en" name="language">EN</option>
+              <option value="ua" name="language">UA</option>
+              <option value="ru" name="language">RU</option>
+            </select> */}
+
+            <Select
+              showSearch
+              style={{ width: 72 }}
+              placeholder="Search to Select"
+              optionFilterProp="children"
+              defaultValue="en"
+              dropdownClassName={styles.inputSelect}
+              // onChange={this.onHandleChange}
+              // fieldNames={options:"country"}
+              // value={this.state.language}
+
+            >
+              <Option value="en">EN</Option>
+              <Option value="ua">UA</Option>
+              <Option value="ru">RU</Option>
+            </Select>
           </form>
         </div>
       </>
