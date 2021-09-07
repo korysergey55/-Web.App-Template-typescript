@@ -1,72 +1,66 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import styles from './styles.module.scss'
-import Weather from '../../stores/Weather'
+import WeatherList from 'containers/WeatherList'
+import { observer } from 'mobx-react'
 import { Select } from 'antd'
+import { useStore } from 'stores'
 const { Option } = Select
 
-class SearchForm extends Component {
-  state = {
+const SearchForm = observer(() => {
+  const { wheatherStore } = useStore()
+  const initialState = {
     sity: '',
-    language: '',
   }
-  onHandleChange = (evt: { target: { name: any; value: any } }) => {
-    this.setState({
-      [evt.target.name]: evt.target.value,
-    })
+  const [state, setState] = useState(initialState)
+
+  const onHandleChange = (evt: any) => {
+    const { name, value } = evt.target
+    setState(prev => ({ ...prev, [name]: value }))
   }
-  handleSubmitForm = (evt: { preventDefault: () => void }) => {
+
+  const onHandleSelectChange = (evt: any) => {
+    wheatherStore.setLenguage(evt)
+  }
+
+  const handleSubmitForm = (evt: { preventDefault: () => void }) => {
     evt.preventDefault()
-    // Weather.sity(this.state.sity)
-    // Weather.fetchForecast(this.state.sity)
+    wheatherStore.fetchForecast(state.sity)
   }
-  render = () => {
-    return (
-      <>
-        <div className={styles.formContainer}>
-          <form onClick={this.handleSubmitForm}>
-            <input
-              className={styles.input}
-              type="text"
-              name="sity"
-              value={this.state.sity}
-              onChange={this.onHandleChange}
-              placeholder="Enter city name"
-            />
-            <button type="submit" className={styles.buttonSubmit}>
-              Add
-            </button>
-            {/* <select
-              className={styles.inputSelect}
-              name="country"
-              value={this.state.language}
-              onChange={this.onHandleChange}
-            >
-              <option value="en" name="language">EN</option>
-              <option value="ua" name="language">UA</option>
-              <option value="ru" name="language">RU</option>
-            </select> */}
-
-            <Select
-              showSearch
-              style={{ width: 72 }}
-              placeholder="Search to Select"
-              optionFilterProp="children"
-              defaultValue="en"
-              dropdownClassName={styles.inputSelect}
-              // onChange={this.onHandleChange}
-              // fieldNames={options:"country"}
-              // value={this.state.language}
-
-            >
-              <Option value="en">EN</Option>
-              <Option value="ua">UA</Option>
-              <Option value="ru">RU</Option>
-            </Select>
-          </form>
+  return (
+    <>
+      <div className={styles.formContainer}>
+        <form onClick={handleSubmitForm}>
+          <input
+            className={styles.input}
+            type="text"
+            name="sity"
+            value={state.sity}
+            onChange={onHandleChange}
+            placeholder="Enter city name"
+          />
+          <button type="submit" className={styles.buttonSubmit}>
+            Add
+          </button>
+        </form>
+        <div className="selectContainer">
+          <Select
+            showSearch
+            style={{ width: 72 }}
+            placeholder="Search to Select"
+            optionFilterProp="children"
+            defaultValue="en"
+            dropdownClassName={styles.inputSelect}
+            onChange={onHandleSelectChange}
+          >
+            <Option value="en">EN</Option>
+            <Option value="ua">UA</Option>
+            <Option value="ru">RU</Option>
+          </Select>
         </div>
-      </>
-    )
-  }
-}
+      </div>
+      <WeatherList />
+    </>
+  )
+})
 
 export default SearchForm

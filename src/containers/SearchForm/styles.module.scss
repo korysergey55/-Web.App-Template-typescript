@@ -1,6 +1,9 @@
 .formContainer {
+  display: flex;
+  justify-content: space-between;
   margin-top: 20px;
   margin-left: 20px;
+  margin-right: 20px;
 }
 .input {
   margin-right: 20px;
@@ -17,7 +20,7 @@
 .buttonSubmit {
   top: 20px;
   left: 310px;
-  margin-right: 50%;
+  
   width: 112px;
   height: 40px;
   background: #459de9 0% 0% no-repeat padding-box;

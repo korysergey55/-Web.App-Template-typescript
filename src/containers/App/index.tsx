@@ -39,7 +39,6 @@ class App extends Component {
               <PrivateRoute roles={['admin']} path="/admin" component={Admin} />
               {/* <Route path="/" component={Public} /> */}
               <Route path="/" component={SearchForm} />
-              <Route path="/list" component={WeatherList} />
             </Switch>
           </Router>
         ) : (

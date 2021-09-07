@@ -10,10 +10,10 @@ import { IUser } from '../models'
 class UserStore {
   constructor() {
     makeAutoObservable(this)
-    reaction(
-      () => this.user,
-      _ => console.log(this.user)
-    )
+    // reaction(
+    //   () => this.user,
+    //   _ => console.log(this.user)
+    // )
   }
 
   @observable user: IUser = { id: 0, name: '', company: { name: '' } }

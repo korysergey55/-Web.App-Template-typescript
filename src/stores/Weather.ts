@@ -4,23 +4,32 @@ import {
   computed,
   observable,
   action,
+  reaction,
+  runInAction,
 } from 'mobx'
 import axios from 'axios'
-// import { decorate } from 'mobx'
 
 class Weather {
-  sity = ''
-  forecast = [{}]
+  @observable lenguage = ''
+  @observable forecast = [{}]
 
   constructor() {
-    makeAutoObservable(this, {
-      forecast: observable,
-      setForecast: action,
-      fetchForecast: action.bound,
-    })
+    makeAutoObservable(this)
+    reaction(
+      () => this.forecast,
+      _ => console.log(this.forecast)
+    )
+    // reaction(
+    //   () => this.lenguage,
+    //   _ => console.log(this.lenguage)
+    // )
   }
 
-  fetchForecast(sity: { preventDefault: () => void }) {
+  @action setLenguage(lenguage: string) {
+    this.lenguage = lenguage
+  }
+
+  @action fetchForecast(sity: string) {
     const REACT_API_KEY = 'd83cbb28a38e206fdd664ad53108a5f0'
     const BASE_URL_WEATHER = 'https://api.openweathermap.org/data/2.5/'
     axios
@@ -29,12 +38,20 @@ class Weather {
       )
       .then(response => response.data)
       .then(newForecastApi => {
-        console.log(newForecastApi)
-        // this.setForecast(newForecastApi)
+        this.setForecast(newForecastApi)
       })
   }
-  setForecast(newForecastApi: any) {
-    this.forecast = [...this.forecast, ...newForecastApi]
+  @action.bound setForecast(newForecastApi: {}) {
+    this.forecast = [newForecastApi]
   }
 }
 export default new Weather()
+
+// {
+//   sity:observable,
+//   lenguage:observable,
+//   forecast: observable,
+//   setSity:action,
+//   setForecast: action,
+//   fetchForecast: action.bound,
+// }
