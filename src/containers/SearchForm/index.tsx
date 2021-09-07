@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import WeatherList from 'containers/WeatherList'
 import { observer } from 'mobx-react'
@@ -12,6 +12,7 @@ const SearchForm = observer(() => {
     sity: '',
   }
   const [state, setState] = useState(initialState)
+  useEffect(() => {})
 
   const onHandleChange = (evt: any) => {
     const { name, value } = evt.target
@@ -20,6 +21,7 @@ const SearchForm = observer(() => {
 
   const onHandleSelectChange = (evt: any) => {
     wheatherStore.setLenguage(evt)
+    wheatherStore.fetchForecast(state.sity)
   }
 
   const handleSubmitForm = (evt: { preventDefault: () => void }) => {

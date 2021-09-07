@@ -20,10 +20,6 @@ class Weather {
       () => this.forecast,
       _ => console.log(toJS(this.forecast))
     )
-    // reaction(
-    //   () => this.lenguage,
-    //   _ => console.log(this.lenguage)
-    // )
   }
 
   @action setLenguage(lenguage: string) {
