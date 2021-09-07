@@ -6,6 +6,7 @@ import {
   action,
   reaction,
   runInAction,
+  toJS,
 } from 'mobx'
 import axios from 'axios'
 
@@ -17,7 +18,7 @@ class Weather {
     makeAutoObservable(this)
     reaction(
       () => this.forecast,
-      _ => console.log(this.forecast)
+      _ => console.log(toJS(this.forecast))
     )
     // reaction(
     //   () => this.lenguage,
@@ -34,7 +35,7 @@ class Weather {
     const BASE_URL_WEATHER = 'https://api.openweathermap.org/data/2.5/'
     axios
       .get(
-        `${BASE_URL_WEATHER}weather?q=${sity}&units=metric&appid=${REACT_API_KEY}`
+        `${BASE_URL_WEATHER}weather?q=${sity}&units=metric&appid=${REACT_API_KEY}&lang=${this.lenguage}`
       )
       .then(response => response.data)
       .then(newForecastApi => {
