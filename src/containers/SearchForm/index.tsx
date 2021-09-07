@@ -12,7 +12,6 @@ const SearchForm = observer(() => {
     sity: '',
   }
   const [state, setState] = useState(initialState)
-  useEffect(() => {})
 
   const onHandleChange = (evt: any) => {
     const { name, value } = evt.target
@@ -31,7 +30,7 @@ const SearchForm = observer(() => {
   return (
     <>
       <div className={styles.formContainer}>
-        <form onClick={handleSubmitForm}>
+        <form>
           <input
             className={styles.input}
             type="text"
@@ -40,7 +39,7 @@ const SearchForm = observer(() => {
             onChange={onHandleChange}
             placeholder="Enter city name"
           />
-          <button type="submit" className={styles.buttonSubmit}>
+          <button onClick={handleSubmitForm} className={styles.buttonSubmit}>
             Add
           </button>
         </form>
