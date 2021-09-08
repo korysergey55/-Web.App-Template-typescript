@@ -1,46 +1,44 @@
-import React, { useState } from 'react'
-import { Bar, Doughnut, Line } from 'react-chartjs-2'
+import React from 'react'
+import { Line } from 'react-chartjs-2'
+import { observer } from 'mobx-react'
+import { useStore } from 'stores'
 
-const ChartComponent = () => {
-  const [chart, SetChartData] = useState()
-  
-  const chartData = {
-    chartData: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{ label: 'temperature',
-       data: [12, 19, 3, 5, 2, 3],
-       backgroundColor: [
-        'rgba(143, 26, 51, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
+const LineChart = observer(() => {
+  const { wheatherStore } = useStore()
+  const { randonTemp } = wheatherStore
+
+  const data = {
+    labels: ['16:00', '17:00', '18:00', '19:00', '20:00', '21:00'],
+    datasets: [
+      {
+        label: 'Temp by Time',
+        data: [...randonTemp],
+        fill: false,
+        backgroundColor: '#5B8CFF',
+        borderColor: 'rgba(255, 99, 132, 0.2)',
+        circular: true,
+      },
     ],
-    borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-    ],
-     }],
+  }
+
+  const options = {
+    maintainAspectRatio: false,
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
     },
   }
+
   return (
     <>
-      <h2>Chart</h2>
-      <div className="chartContainer">
-        {/* <Bar
-          data={chartData}
-          width={50}
-          height={50}
-          options={{ maintainAspectRatio: false }}
-        /> */}
-      </div>
+      <Line data={data} options={options} width={150} height={80} />
     </>
   )
-}
+})
 
-export default ChartComponent
+export default LineChart

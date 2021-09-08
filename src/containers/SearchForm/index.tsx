@@ -4,13 +4,14 @@ import WeatherList from 'containers/WeatherList'
 import { observer } from 'mobx-react'
 import { Select } from 'antd'
 import { useStore } from 'stores'
+import { toJS } from 'mobx'
 const { Option } = Select
 
 const SearchForm = observer(() => {
   const { wheatherStore } = useStore()
-  const initialState = {
-    sity: '',
-  }
+  const { forecastByTime } = wheatherStore
+
+  const initialState = { sity: '' }
   const [state, setState] = useState(initialState)
 
   const onHandleChange = (evt: any) => {
@@ -26,7 +27,24 @@ const SearchForm = observer(() => {
   const handleSubmitForm = (evt: { preventDefault: () => void }) => {
     evt.preventDefault()
     wheatherStore.fetchForecast(state.sity)
+    wheatherStore.fetchForecastByTime(state.sity)
+    wheatherStore.setRandonTemp(arrayRandomTemperature())
   }
+
+  const getRandomTemperature = (min = 0, max = 37) => {
+    return (
+      Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min))) +
+      Math.ceil(min)
+    )
+  }
+  const arrayRandomTemperature = () => {
+    let temp = []
+    for (let i = 0; i <= 7; i += 1) {
+      temp.push(getRandomTemperature())
+    }
+    return temp
+  }
+
   return (
     <>
       <div className={styles.formContainer}>

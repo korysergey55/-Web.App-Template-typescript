@@ -9,10 +9,13 @@ import {
   toJS,
 } from 'mobx'
 import axios from 'axios'
+// "d83cbb28a38e206fdd664ad53108a5f0" old key
 
 class Weather {
   @observable lenguage = ''
   @observable forecast = [{}]
+  @observable forecastByTime = [{}]
+  @observable randonTemp = []
 
   constructor() {
     makeAutoObservable(this)
@@ -26,8 +29,12 @@ class Weather {
     this.lenguage = lenguage
   }
 
+  @action setRandonTemp(randonTemp:any){
+    this.randonTemp = randonTemp
+  }
+  
   @action fetchForecast(sity: string) {
-    const REACT_API_KEY = 'd83cbb28a38e206fdd664ad53108a5f0'
+    const REACT_API_KEY = 'b32058f10fd03c991cd00d5d3d9b95f9'
     const BASE_URL_WEATHER = 'https://api.openweathermap.org/data/2.5/'
     axios
       .get(
@@ -41,6 +48,24 @@ class Weather {
   @action.bound setForecast(newForecastApi: {}) {
     this.forecast = [newForecastApi]
   }
+
+
+  @action fetchForecastByTime(sity: string) {
+    const REACT_API_KEY = 'b32058f10fd03c991cd00d5d3d9b95f9'
+    const BASE_URL_WEATHER_BY_TIME = 'https://pro.openweathermap.org/data/2.5/'
+    axios
+      .get(
+        `${BASE_URL_WEATHER_BY_TIME}forecast/hourly?q=${sity}&appid=${REACT_API_KEY}`
+      )
+      .then(response => response.data)
+      .then(newForecastByTimeApi => {
+        this.setForecastByTime(newForecastByTimeApi)
+      })
+  }
+  @action.bound setForecastByTime(newForecastByTimeApi: {}) {
+    this.forecastByTime = [newForecastByTimeApi]
+  }
+
 }
 export default new Weather()
 
