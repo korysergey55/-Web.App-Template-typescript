@@ -6,12 +6,18 @@ import { Select } from 'antd'
 import { useStore } from 'stores'
 import { toJS } from 'mobx'
 const { Option } = Select
+const initialState = { sity: '' }
 
-const SearchForm = observer(() => {
+interface IProps {
+  name?: string
+  chairsCount: number
+  handleChange?: () => void
+}
+
+const SearchForm: React.FC<IProps> = observer((props) => {
   const { wheatherStore } = useStore()
   const { forecastByTime } = wheatherStore
 
-  const initialState = { sity: '' }
   const [state, setState] = useState(initialState)
 
   const onHandleChange = (evt: any) => {
@@ -27,7 +33,7 @@ const SearchForm = observer(() => {
   const handleSubmitForm = (evt: { preventDefault: () => void }) => {
     evt.preventDefault()
     wheatherStore.fetchForecast(state.sity)
-    wheatherStore.fetchForecastByTime(state.sity)
+    // wheatherStore.fetchForecastByTime(state.sity)
     wheatherStore.setRandonTemp(arrayRandomTemperature())
   }
 

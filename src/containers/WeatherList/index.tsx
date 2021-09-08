@@ -6,12 +6,11 @@ import { toJS } from 'mobx'
 import { useStore } from 'stores'
 import dayjs from 'dayjs'
 const iconURL = 'http://openweathermap.org/img/wn/'
-// const icon = `${iconURL}${item.weather[0].icon}.png`;
 
 const WeatherList = observer(() => {
   const { wheatherStore } = useStore()
   const { forecast } = wheatherStore
-  // console.log(toJS(forecast))
+  console.log(toJS(forecast))
 
   useEffect(() => {
     setInitialTemp(forecast)
