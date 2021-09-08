@@ -16,10 +16,10 @@ class Weather {
 
   constructor() {
     makeAutoObservable(this)
-    reaction(
-      () => this.forecast,
-      _ => console.log(toJS(this.forecast))
-    )
+    // reaction(
+    //   () => this.forecast,
+    //   _ => console.log(toJS(this.forecast))
+    // )
   }
 
   @action setLenguage(lenguage: string) {
