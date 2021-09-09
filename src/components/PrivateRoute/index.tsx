@@ -10,9 +10,7 @@ interface IProps {
   redirectTo?: string | object
 }
 
-export const PrivateRoute = (
-  props: RouteProps & IProps
-): React.ReactElement => {
+export const PrivateRoute = (props: RouteProps & IProps): React.ReactElement => {
   const { userStore } = useStore()
   const { user } = userStore
 

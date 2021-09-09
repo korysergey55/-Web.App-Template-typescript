@@ -12,21 +12,18 @@ import {
 } from 'mobx'
 import axios from 'axios'
 
-// "d83cbb28a38e206fdd664ad53108a5f0" old key
-
 class Weather {
   @observable lenguage = ''
-  // @observable forecast: IWeather[] = []
-  @observable forecast = [{}]
+  @observable forecast: Array<IWeather> = []
   @observable forecastByTime = [{}]
   @observable randonTemp = []
 
   constructor() {
     makeAutoObservable(this)
-    // reaction(
-    //   () => this.forecast,
-    //   _ => console.log(toJS(this.forecast))
-    // )
+    reaction(
+      () => this.forecast,
+      _ => console.log(toJS(this.forecast))
+    )
   }
 
   @action setLenguage(lenguage: string) {
@@ -38,19 +35,17 @@ class Weather {
   }
 
   @action async fetchForecast(sity: string) {
-    const REACT_API_KEY = 'b32058f10fd03c991cd00d5d3d9b95f9'
-    
     const response = await api.get(`/weather`, {
       params: {
         q: sity,
         units: 'metric',
-        appid: REACT_API_KEY,
+        appid: process.env.REACT_APP_API_KEY,
         lang: this.lenguage,
       },
     })
     this.setForecast(response.data)
   }
-  
+
   @action.bound setForecast(newForecastApi: IWeather) {
     this.forecast = [newForecastApi]
   }

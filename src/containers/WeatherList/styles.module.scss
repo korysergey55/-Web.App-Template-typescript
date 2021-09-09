@@ -1,9 +1,9 @@
-.weathermainContainer {
+.weatherMainContainer {
   position: relative;
   margin: 0 auto;
-  width: 370px;
-  height: 277px;
-  padding: 10px;
+  width: 350px;
+  min-height: 257px;
+  padding: 10px 15px;
   background: #fff1fe 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 5px;
@@ -13,9 +13,17 @@
   display: flex;
   justify-content: space-between;
 }
+.close {
+  color: #c5c5c5;
+  position: absolute;
+  left: 95%;
+  top: 0%;
+}
 .location {
+  font-family: Jost;
+  font-size: 16px;
+  font-weight: normal;
   text-align: left;
-  font: normal normal normal 16px/23px Jost;
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
@@ -24,32 +32,40 @@
 .weatherDiscription {
   display: inline-block;
   margin-right: 20px;
+  margin-bottom: 0;
   text-align: left;
   font: normal normal normal 13px/19px Jost;
   letter-spacing: 0px;
   color: #c5c5c5;
   opacity: 1;
 }
+.weatherDiscription::first-letter {
+  text-transform: uppercase;
+}
+.date {
+  margin-bottom: 0;
+}
 .grafic {
-  min-width: 300px;
-  min-height: 80px;
+  min-width: 320px;
+  min-height: 60px;
+  margin-bottom: 10px;
 }
 .temperature {
   margin-bottom: 0;
   text-align: left;
-  font: normal normal normal 44px/64px Jost;
+  font: normal normal normal 42px/62px Jost;
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
 }
 .buttonsContainer {
   position: absolute;
-  top: 65%;
-  left: 30%;
+  top: 64%;
+  left: 25%;
 }
 .buttonCelciy {
   border: none;
-  border-right: 1px solid black;
+  border-right: 1px solid #8D8D8D;
   text-align: left;
   font: normal normal normal 22px/32px Jost;
   letter-spacing: 0px;
@@ -71,6 +87,7 @@
   cursor: pointer;
 }
 .temperatureFellsLike {
+  margin-bottom: 0;
   text-align: left;
   font: normal normal normal 13px/19px Jost;
   letter-spacing: 0px;
@@ -79,10 +96,11 @@
 }
 .rightSideContainer {
   position: absolute;
-  top: 65%;
+  top: 69%;
   left: 70%;
 }
 .rightSide {
+  margin-bottom: 5px;
   text-align: left;
   font: normal normal normal 12px/18px Jost;
   letter-spacing: 0px;

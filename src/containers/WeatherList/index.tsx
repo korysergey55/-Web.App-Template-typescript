@@ -10,17 +10,18 @@ const iconURL = 'http://openweathermap.org/img/wn/'
 const WeatherList = observer(() => {
   const { wheatherStore } = useStore()
   const { forecast } = wheatherStore
-  console.log(toJS(forecast))
-
+ 
   useEffect(() => {
     setInitialTemp(forecast)
   }, [forecast])
 
-  const [temp, setTemp] = useState<number | string>(0)
+  const [temp, setTemp] = useState <number | string>(0)
 
   const setInitialTemp = (forecast: any) => {
-    const res: number = parseFloat(forecast[0].main?.temp)
-    setTemp(res.toFixed(0))
+    if (forecast[0] && forecast[0].main) {
+      const res: number = parseFloat(forecast[0].main?.temp)
+      setTemp(res.toFixed(0))
+    }
   }
   const changeTemperageFaringate = (item: any) => {
     const res: number = parseFloat(item.main.temp) * (9 / 5) + 32
@@ -33,11 +34,11 @@ const WeatherList = observer(() => {
 
   return (
     <>
-      {Object.keys(forecast[0]).length
-        ? forecast?.map((item: any, index: number) => {
+      {forecast.length ? forecast?.map((item: any, index: number) => {
             return (
-              <div className={styles.weathermainContainer} key={item.id}>
+              <div className={styles.weatherMainContainer} key={item.id}>
                 <div className={styles.weatherListContainer}>
+                  <a className={styles.close}>x</a>
                   <h2 className={styles.location}>
                     {item.name},{item.sys?.country}
                   </h2>
@@ -53,7 +54,7 @@ const WeatherList = observer(() => {
                     </p>
                   </div>
                 </div>
-                <h2> {dayjs.unix(item.dt).format('dd, D MMMM, HH:mm')}</h2>
+                <h2 className={styles.date}> {dayjs.unix(item.dt).format('dd, D MMMM, HH:mm')}</h2>
                 <div className={styles.grafic}>
                   <LineChart />
                 </div>
@@ -71,7 +72,7 @@ const WeatherList = observer(() => {
                     &deg;F
                   </button>
                 </div>
-                <p className={styles.temperature}>+ {temp}</p>
+                <p className={styles.temperature}>+{temp}</p>
                 <p className={styles.temperatureFellsLike}>
                   Feels like: {item.main.feels_like.toFixed(0)} &deg;C
                 </p>

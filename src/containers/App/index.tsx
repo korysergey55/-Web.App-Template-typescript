@@ -9,7 +9,6 @@ import Admin from '../Admin'
 import store from 'stores'
 import * as userActions from 'actions/users'
 import SearchForm from '../../containers/SearchForm/index'
-import WeatherList from '../../containers/WeatherList/index'
 
 class App extends Component {
   state = {

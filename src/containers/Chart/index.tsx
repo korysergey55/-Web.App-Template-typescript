@@ -13,24 +13,66 @@ const LineChart = observer(() => {
       {
         label: 'Temp by Time',
         data: [...randonTemp],
-        fill: false,
+        fill: true,
         backgroundColor: '#5B8CFF',
-        borderColor: 'rgba(255, 99, 132, 0.2)',
-        circular: true,
+        pointStyle: 'line',
+        tension: 0.5,
       },
     ],
   }
 
   const options = {
     maintainAspectRatio: false,
+    bezierCurve: false,
+    
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+    elements: {
+      line: {
+        tension: 0.5,
+        borderWidth: 2,
+      },
+    },
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
+      yAxes: {
+        display: false,
+        position: 'right',
+        color: '#5B8CFF',
+        title: {
+          align: 'top',
+          color: '#C5C5C5',
+        },
+        ticks: {
+          beginAtZero: true,
+          color: '#C5C5C5',
+          font: {
+            size: 10,
+            lineHeight: 1.2,
           },
         },
-      ],
+        grid: {
+          color: 'transparent',
+          borderWidth: 'transparent',
+        },
+      },
+      xAxes: {
+        display: true,
+        ticks: {
+          beginAtZero: true,
+          color: '#C5C5C5',
+          font: {
+            size: 10,
+            lineHeight: 1.2,
+          },
+        },
+        grid: {
+          color: 'transparent',
+          borderWidth: 'transparent',
+        },
+      },
     },
   }
 

@@ -6,7 +6,7 @@ import { Select } from 'antd'
 import { useStore } from 'stores'
 import { toJS } from 'mobx'
 const { Option } = Select
-const initialState = { sity: '' }
+const initialState = { sity: 'cherkasy' }
 
 interface IProps {
   name?: string
