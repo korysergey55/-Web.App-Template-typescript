@@ -2,6 +2,9 @@ import React from 'react'
 import { Line } from 'react-chartjs-2'
 import { observer } from 'mobx-react'
 import { useStore } from 'stores'
+import { Chart } from 'chart.js'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
+Chart.register(ChartDataLabels)
 
 const LineChart = observer(() => {
   const { wheatherStore } = useStore()
@@ -16,7 +19,16 @@ const LineChart = observer(() => {
         fill: true,
         backgroundColor: '#5B8CFF',
         pointStyle: 'line',
-        tension: 0.5,
+        datalabels: {
+          color: '#918f8f',
+          anchor: 'start',
+          align: 'top',
+          offset:1,
+          font: {
+            size: 8,
+            lineHeight: 1.2,
+          },
+        },
       },
     ],
   }
@@ -24,7 +36,7 @@ const LineChart = observer(() => {
   const options = {
     maintainAspectRatio: false,
     bezierCurve: false,
-    
+    // plugins: [ChartDataLabels],
     plugins: {
       legend: {
         display: false,

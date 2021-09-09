@@ -43,12 +43,14 @@
   text-transform: uppercase;
 }
 .date {
-  margin-bottom: 0;
+  margin-bottom: 5px;
 }
 .grafic {
   min-width: 320px;
   min-height: 60px;
   margin-bottom: 10px;
+  // border-radius: 7px;
+  // padding-top: 20px;
 }
 .temperature {
   margin-bottom: 0;
@@ -96,7 +98,7 @@
 }
 .rightSideContainer {
   position: absolute;
-  top: 69%;
+  top: 71%;
   left: 70%;
 }
 .rightSide {
