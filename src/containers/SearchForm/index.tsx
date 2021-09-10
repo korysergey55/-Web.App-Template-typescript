@@ -34,8 +34,8 @@ const SearchForm: React.FC<IProps> = observer(props => {
     evt.preventDefault()
     wheatherStore.fetchForecast(state.sity)
     wheatherStore.setRandonTemp(arrayRandomTemperature())
+    wheatherStore.setTimeChart(getTimeForChart())
     recetForm()
-    getTimeForChart()
   }
 
   const recetForm: any = () => {
@@ -59,13 +59,18 @@ const SearchForm: React.FC<IProps> = observer(props => {
   const getTimeForChart = () => {
     let tempForChart = []
     let correntTime = wheatherStore.forecast[0]?.dt
-    for (let i = 0; i <= 7; i += 1) {
-      let time = correntTime + 3600000
-      const formatedTime = dayjs.unix(time).format('HH:mm')
-      tempForChart.push(formatedTime)
+    if (wheatherStore.forecast[0]?.dt) {
+      for (let i = 0; i <= 7; i += 1) {
+        const formatedTime = dayjs.unix(correntTime).format('HH')
+        let newTime = Number(formatedTime) - i + ':00'
+        tempForChart.push(newTime)
+      }
+    } else {
+      tempForChart = ['16:00', '17:00', '18:00', '19:00', '20:00', '21:00']
+      return tempForChart
     }
-    console.log(tempForChart)
-    return tempForChart
+    
+    return tempForChart.reverse()
   }
 
   return (

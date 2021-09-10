@@ -9,17 +9,18 @@ Chart.register(ChartDataLabels)
 const LineChart = observer(() => {
   const { wheatherStore } = useStore()
   const { randonTemp } = wheatherStore
+  const { timeChart } = wheatherStore
   const [datas, setDatas] = useState<any>({})
 
   useEffect(() => {
     // @ts-ignore
     let ctx = document.getElementById('canvas').getContext('2d')
     let gradient = ctx.createLinearGradient(0, 0, 0, 80)
-    gradient.addColorStop(0, '#5B8CFF');   
-    gradient.addColorStop(1, '#FFF4F4');
+    gradient.addColorStop(0, '#5B8CFF')
+    gradient.addColorStop(1, '#FFF4F4')
 
     const newData = {
-      labels: ['16:00', '17:00', '18:00', '19:00', '20:00', '21:00'],
+      labels: [...timeChart],
       datasets: [
         {
           fill: true,
@@ -43,7 +44,6 @@ const LineChart = observer(() => {
     }
     setDatas(newData)
   }, [])
-
 
   const options = {
     maintainAspectRatio: false,

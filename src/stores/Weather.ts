@@ -17,6 +17,7 @@ class Weather {
   @observable forecast: Array<IWeather> = []
   @observable forecastByTime = [{}]
   @observable randonTemp = []
+  @observable timeChart = []
 
   constructor() {
     makeAutoObservable(this)
@@ -32,6 +33,9 @@ class Weather {
 
   @action setRandonTemp(randonTemp: any) {
     this.randonTemp = randonTemp
+  }
+  @action setTimeChart(time: any) {
+    this.timeChart = time
   }
 
   @action async fetchForecast(sity: string) {
