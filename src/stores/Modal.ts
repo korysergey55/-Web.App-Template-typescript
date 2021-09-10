@@ -9,7 +9,6 @@ import {
   toJS,
 } from 'mobx'
 
-
 class Modal {
   @observable modal = false
  

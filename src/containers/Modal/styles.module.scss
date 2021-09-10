@@ -25,14 +25,16 @@
  }
  .closeModal {
   position: absolute;
-  top: 1%;
-  left: 7%;
+  top: 2%;
+  left: 8%;
   margin-top: 0px;
   margin-left: 88%;
-  background-color: rgb(94, 255, 0);
+  background-color: red;
+  color: white;
   border-radius: 10px;
  }
  .closeModal:hover {
+   cursor: pointer;
   background-color: red;
   color: white;
  }
