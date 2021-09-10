@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/Web.App-Template-typescript/static/css/main.f82a190a.chunk.css",
+    "main.js": "/Web.App-Template-typescript/static/js/main.fcc53d3c.chunk.js",
+    "main.js.map": "/Web.App-Template-typescript/static/js/main.fcc53d3c.chunk.js.map",
+    "runtime-main.js": "/Web.App-Template-typescript/static/js/runtime-main.26c014b8.js",
+    "runtime-main.js.map": "/Web.App-Template-typescript/static/js/runtime-main.26c014b8.js.map",
+    "static/css/2.5cc265e8.chunk.css": "/Web.App-Template-typescript/static/css/2.5cc265e8.chunk.css",
+    "static/js/2.f4f0119e.chunk.js": "/Web.App-Template-typescript/static/js/2.f4f0119e.chunk.js",
+    "static/js/2.f4f0119e.chunk.js.map": "/Web.App-Template-typescript/static/js/2.f4f0119e.chunk.js.map",
+    "index.html": "/Web.App-Template-typescript/index.html",
+    "precache-manifest.b1497679175ac6ef78935ca181f4dcf0.js": "/Web.App-Template-typescript/precache-manifest.b1497679175ac6ef78935ca181f4dcf0.js",
+    "service-worker.js": "/Web.App-Template-typescript/service-worker.js",
+    "static/css/2.5cc265e8.chunk.css.map": "/Web.App-Template-typescript/static/css/2.5cc265e8.chunk.css.map",
+    "static/css/main.f82a190a.chunk.css.map": "/Web.App-Template-typescript/static/css/main.f82a190a.chunk.css.map",
+    "static/js/2.f4f0119e.chunk.js.LICENSE.txt": "/Web.App-Template-typescript/static/js/2.f4f0119e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.26c014b8.js",
+    "static/css/2.5cc265e8.chunk.css",
+    "static/js/2.f4f0119e.chunk.js",
+    "static/css/main.f82a190a.chunk.css",
+    "static/js/main.fcc53d3c.chunk.js"
+  ]
+}
