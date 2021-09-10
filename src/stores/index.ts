@@ -4,6 +4,7 @@ import { configure, observable } from 'mobx'
 import userStore from './User'
 import usersStore from './Users'
 import wheatherStore from './Weather'
+import modalStore from './Modal'
 
 configure({ enforceActions: 'observed' })
 
@@ -11,6 +12,8 @@ class RootStore {
   @observable usersStore = usersStore
   @observable userStore = userStore
   @observable wheatherStore = wheatherStore
+  @observable modalStore = modalStore
+
 }
 
 const rootStore = new RootStore()

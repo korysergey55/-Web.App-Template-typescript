@@ -1,0 +1,39 @@
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1200;
+ }
+ 
+ .Modal {
+  position: relative;
+  min-width: 900px;
+  min-height: 300px;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 24px);
+  margin: 0 auto;
+  padding: 15px;
+  background-color: white;
+  border-radius: 15px;
+  overflow-y: auto;
+ }
+ .closeModal {
+  position: absolute;
+  top: 1%;
+  left: 7%;
+  margin-top: 0px;
+  margin-left: 88%;
+  background-color: rgb(94, 255, 0);
+  border-radius: 10px;
+ }
+ .closeModal:hover {
+  background-color: red;
+  color: white;
+ }
+ 

@@ -6,6 +6,7 @@ import { Select } from 'antd'
 import { useStore } from 'stores'
 import { toJS } from 'mobx'
 import dayjs from 'dayjs'
+import Modal from 'containers/Modal'
 
 const { Option } = Select
 const initialState = { sity: 'cherkasy' }
@@ -19,6 +20,7 @@ interface IProps {
 const SearchForm: React.FC<IProps> = observer(props => {
   const { wheatherStore } = useStore()
   const [state, setState] = useState(initialState)
+  const { modalStore } = useStore()
 
   const onHandleChange = (evt: any) => {
     const { name, value } = evt.target
@@ -35,6 +37,7 @@ const SearchForm: React.FC<IProps> = observer(props => {
     wheatherStore.fetchForecast(state.sity)
     wheatherStore.setRandonTemp(arrayRandomTemperature())
     wheatherStore.setTimeChart(getTimeForChart())
+    modalStore.setModal()
     recetForm()
   }
 
@@ -69,7 +72,7 @@ const SearchForm: React.FC<IProps> = observer(props => {
       tempForChart = ['16:00', '17:00', '18:00', '19:00', '20:00', '21:00']
       return tempForChart
     }
-    
+
     return tempForChart.reverse()
   }
 
@@ -106,11 +109,13 @@ const SearchForm: React.FC<IProps> = observer(props => {
         </div>
       </div>
       <WeatherList />
+      {modalStore.modal ? (
+        <Modal>
+          <WeatherList />
+        </Modal>
+      ) : null}
     </>
   )
 })
 
 export default SearchForm
-function sity(sity: any, arg1: string) {
-  throw new Error('Function not implemented.')
-}
