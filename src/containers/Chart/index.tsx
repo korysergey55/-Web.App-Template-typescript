@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Line } from 'react-chartjs-2'
 import { observer } from 'mobx-react'
 import { useStore } from 'stores'
@@ -9,31 +9,41 @@ Chart.register(ChartDataLabels)
 const LineChart = observer(() => {
   const { wheatherStore } = useStore()
   const { randonTemp } = wheatherStore
+  const [datas, setDatas] = useState<any>({})
 
-  const data = {
-    labels: ['16:00', '17:00', '18:00', '19:00', '20:00', '21:00'],
-    datasets: [
-      {
-        label: 'Temp by Time',
-        data: [...randonTemp],
-        fill: true,
-        backgroundColor: '#5B8CFF',
-        pointStyle: 'line',
-        borderRadius: 7,
+  useEffect(() => {
+    // @ts-ignore
+    let ctx = document.getElementById('canvas').getContext('2d')
+    let gradient = ctx.createLinearGradient(0, 0, 0, 80)
+    gradient.addColorStop(0, '#5B8CFF');   
+    gradient.addColorStop(1, '#FFF4F4');
 
-        datalabels: {
-          color: '#918f8f',
-          anchor: 'start',
-          align: 'top',
-          offset: 0,
-          font: {
-            size: 8,
-            lineHeight: 1.2,
+    const newData = {
+      labels: ['16:00', '17:00', '18:00', '19:00', '20:00', '21:00'],
+      datasets: [
+        {
+          fill: true,
+          data: [...randonTemp],
+          backgroundColor: gradient,
+          pointStyle: 'line',
+          borderRadius: 7,
+
+          datalabels: {
+            color: '#918f8f',
+            anchor: 'start',
+            align: 'top',
+            offset: 0,
+            font: {
+              size: 8,
+              lineHeight: 1.2,
+            },
           },
         },
-      },
-    ],
-  }
+      ],
+    }
+    setDatas(newData)
+  }, [])
+
 
   const options = {
     maintainAspectRatio: false,
@@ -91,7 +101,13 @@ const LineChart = observer(() => {
 
   return (
     <>
-      <Line data={data} options={options} width={150} height={80} />
+      <Line
+        id={'canvas'}
+        data={datas}
+        options={options}
+        width={150}
+        height={80}
+      />
     </>
   )
 })

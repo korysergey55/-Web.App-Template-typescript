@@ -58,13 +58,16 @@ const SearchForm: React.FC<IProps> = observer(props => {
 
   const getTimeForChart = () => {
     let tempForChart = []
-    let correntTime =  wheatherStore.forecast[0]?.dt
-    const time = dayjs.unix(correntTime).format('HH:mm')
-    tempForChart.push(time)
-    console.log(time)
+    let correntTime = wheatherStore.forecast[0]?.dt
+    for (let i = 0; i <= 7; i += 1) {
+      let time = correntTime + 3600000
+      const formatedTime = dayjs.unix(time).format('HH:mm')
+      tempForChart.push(formatedTime)
+    }
+    console.log(tempForChart)
     return tempForChart
   }
-  
+
   return (
     <>
       <div className={styles.formContainer}>
