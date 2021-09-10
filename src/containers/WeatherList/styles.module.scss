@@ -43,14 +43,12 @@
   text-transform: uppercase;
 }
 .date {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .grafic {
   min-width: 320px;
   min-height: 60px;
   margin-bottom: 10px;
-  // border-radius: 7px;
-  // padding-top: 20px;
 }
 .temperature {
   margin-bottom: 0;
@@ -67,7 +65,7 @@
 }
 .buttonCelciy {
   border: none;
-  border-right: 1px solid #8D8D8D;
+  border-right: 1px solid #8d8d8d;
   text-align: left;
   font: normal normal normal 22px/32px Jost;
   letter-spacing: 0px;
@@ -113,4 +111,24 @@
   font: normal normal normal 12px/18px Jost;
   letter-spacing: 0px;
   color: #459de9;
+}
+.activ {
+  border: none;
+  text-align: left;
+  font: normal normal normal 22px/32px Jost;
+  letter-spacing: 0px;
+  background: #fff1fe 0% 0% no-repeat padding-box;
+  opacity: 1;
+  color: #8d8d8d;
+}
+
+.activCelciy{
+  border: none;
+  border-right: 1px solid #8d8d8d;
+  text-align: left;
+  font: normal normal normal 22px/32px Jost;
+  letter-spacing: 0px;
+  background: #fff1fe 0% 0% no-repeat padding-box;
+  opacity: 1;
+  color: #8d8d8d;
 }

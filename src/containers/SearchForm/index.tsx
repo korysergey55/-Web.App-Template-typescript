@@ -5,6 +5,8 @@ import { observer } from 'mobx-react'
 import { Select } from 'antd'
 import { useStore } from 'stores'
 import { toJS } from 'mobx'
+import dayjs from 'dayjs'
+
 const { Option } = Select
 const initialState = { sity: 'cherkasy' }
 
@@ -14,10 +16,8 @@ interface IProps {
   handleChange?: () => void
 }
 
-const SearchForm: React.FC<IProps> = observer((props) => {
+const SearchForm: React.FC<IProps> = observer(props => {
   const { wheatherStore } = useStore()
-  const { forecastByTime } = wheatherStore
-
   const [state, setState] = useState(initialState)
 
   const onHandleChange = (evt: any) => {
@@ -33,8 +33,13 @@ const SearchForm: React.FC<IProps> = observer((props) => {
   const handleSubmitForm = (evt: { preventDefault: () => void }) => {
     evt.preventDefault()
     wheatherStore.fetchForecast(state.sity)
-    // wheatherStore.fetchForecastByTime(state.sity)
     wheatherStore.setRandonTemp(arrayRandomTemperature())
+    recetForm()
+    getTimeForChart()
+  }
+
+  const recetForm: any = () => {
+    setState({ sity: '' })
   }
 
   const getRandomTemperature = (min = 0, max = 37) => {
@@ -51,6 +56,15 @@ const SearchForm: React.FC<IProps> = observer((props) => {
     return temp
   }
 
+  const getTimeForChart = () => {
+    let tempForChart = []
+    let correntTime =  wheatherStore.forecast[0]?.dt
+    const time = dayjs.unix(correntTime).format('HH:mm')
+    tempForChart.push(time)
+    console.log(time)
+    return tempForChart
+  }
+  
   return (
     <>
       <div className={styles.formContainer}>
@@ -89,3 +103,6 @@ const SearchForm: React.FC<IProps> = observer((props) => {
 })
 
 export default SearchForm
+function sity(sity: any, arg1: string) {
+  throw new Error('Function not implemented.')
+}

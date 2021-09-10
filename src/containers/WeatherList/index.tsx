@@ -10,12 +10,13 @@ const iconURL = 'http://openweathermap.org/img/wn/'
 const WeatherList = observer(() => {
   const { wheatherStore } = useStore()
   const { forecast } = wheatherStore
- 
+
   useEffect(() => {
     setInitialTemp(forecast)
   }, [forecast])
 
-  const [temp, setTemp] = useState <number | string>(0)
+  const [temp, setTemp] = useState<number | string>(0)
+  const [activClass, setActivClass] = useState(false)
 
   const setInitialTemp = (forecast: any) => {
     if (forecast[0] && forecast[0].main) {
@@ -26,15 +27,18 @@ const WeatherList = observer(() => {
   const changeTemperageFaringate = (item: any) => {
     const res: number = parseFloat(item.main.temp) * (9 / 5) + 32
     setTemp(res.toFixed(0))
+    setActivClass(prev => !prev)
   }
   const changeTemperageCelciy = (item: any) => {
     const res: number = parseFloat(item.main.temp)
     setTemp(res.toFixed(0))
+    setActivClass(prev => !prev)
   }
 
   return (
     <>
-      {forecast.length ? forecast?.map((item: any, index: number) => {
+      {forecast.length
+        ? forecast?.map((item: any, index: number) => {
             return (
               <div className={styles.weatherMainContainer} key={item.id}>
                 <div className={styles.weatherListContainer}>
@@ -54,19 +58,21 @@ const WeatherList = observer(() => {
                     </p>
                   </div>
                 </div>
-                <h2 className={styles.date}> {dayjs.unix(item.dt).format('dd, D MMMM, HH:mm')}</h2>
+                <h2 className={styles.date}>
+                  {' '}
+                  {dayjs.unix(item.dt).format('dd, D MMMM, HH:mm')}
+                </h2>
                 <div className={styles.grafic}>
                   <LineChart />
                 </div>
                 <div className={styles.buttonsContainer}>
                   <button
-                    className={styles.buttonCelciy}
                     onClick={() => changeTemperageCelciy(item)}
-                  >
-                    &deg;C
+                    className={ activClass ? styles.buttonCelciy : styles.activCelciy}
+                  > &deg;C
                   </button>
                   <button
-                    className={styles.buttonFaringeit}
+                    className={activClass ? styles.activ : styles.buttonFaringeit }
                     onClick={() => changeTemperageFaringate(item)}
                   >
                     &deg;F

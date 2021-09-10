@@ -19,11 +19,13 @@ const LineChart = observer(() => {
         fill: true,
         backgroundColor: '#5B8CFF',
         pointStyle: 'line',
+        borderRadius: 7,
+
         datalabels: {
           color: '#918f8f',
           anchor: 'start',
           align: 'top',
-          offset:1,
+          offset: 0,
           font: {
             size: 8,
             lineHeight: 1.2,
@@ -36,7 +38,6 @@ const LineChart = observer(() => {
   const options = {
     maintainAspectRatio: false,
     bezierCurve: false,
-    // plugins: [ChartDataLabels],
     plugins: {
       legend: {
         display: false,
@@ -61,7 +62,7 @@ const LineChart = observer(() => {
           beginAtZero: true,
           color: '#C5C5C5',
           font: {
-            size: 10,
+            size: 12,
             lineHeight: 1.2,
           },
         },
