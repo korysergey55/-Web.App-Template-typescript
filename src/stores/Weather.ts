@@ -15,7 +15,6 @@ import axios from 'axios'
 class Weather {
   @observable lenguage = ''
   @observable forecast: Array<IWeather> = []
-  @observable forecastByTime = [{}]
   @observable randonTemp = []
   @observable timeChart = []
 
@@ -54,29 +53,17 @@ class Weather {
     this.forecast = [newForecastApi]
   }
 
-  @action fetchForecastByTime(sity: string) {
+  @action fetchForecastByLocation(lat: number,  lon: number ) {
     const REACT_API_KEY = 'b32058f10fd03c991cd00d5d3d9b95f9'
-    const BASE_URL_WEATHER_BY_TIME = 'https://pro.openweathermap.org/data/2.5/'
-    axios
+    const BASE_URL_WEATHER_BY_LOCATION = 'https://api.openweathermap.org/data/2.5/'
+     axios
       .get(
-        `${BASE_URL_WEATHER_BY_TIME}forecast/hourly?q=${sity}&appid=${REACT_API_KEY}`
+        `${BASE_URL_WEATHER_BY_LOCATION}weather?lat=${lat}&lon=${lon}&appid=${REACT_API_KEY}`
       )
       .then(response => response.data)
-      .then(newForecastByTimeApi => {
-        this.setForecastByTime(newForecastByTimeApi)
+      .then(newForecastByLocationApi => {
+        this.setForecast(newForecastByLocationApi)
       })
-  }
-  @action.bound setForecastByTime(newForecastByTimeApi: {}) {
-    this.forecastByTime = [newForecastByTimeApi]
   }
 }
 export default new Weather()
-
-// {
-//   sity:observable,
-//   lenguage:observable,
-//   forecast: observable,
-//   setSity:action,
-//   setForecast: action,
-//   fetchForecast: action.bound,
-// }

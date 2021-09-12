@@ -40,3 +40,12 @@ export interface IWeather {
     speed: number
   }
 }
+
+export interface Employees {
+  [key: string]: number[]
+}
+const mployees: Employees  = {
+  mango: [6,8,3,5,7],
+  poly: [6,8,3,5,7],
+  ajax: [6,8,3,5,7],
+}

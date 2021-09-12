@@ -4,7 +4,9 @@ import { createPortal } from 'react-dom'
 import { useStore } from 'stores'
 
 const Modal: React.FC= ({children}) => {
+  
 const {modalStore} = useStore()
+
   useEffect(() => {
     window.addEventListener("keydown", handleEsc);
     const body: any = document.querySelector("body");

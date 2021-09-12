@@ -7,9 +7,9 @@ import { useStore } from 'stores'
 import { toJS } from 'mobx'
 import dayjs from 'dayjs'
 import Modal from 'containers/Modal'
-
+import useGeoPosition from '../Geoposition/index'
 const { Option } = Select
-const initialState = { sity: 'cherkasy' }
+const initialState = { sity: '' }
 
 interface IProps {
   name?: string
@@ -21,6 +21,8 @@ const SearchForm: React.FC<IProps> = observer(props => {
   const { wheatherStore } = useStore()
   const [state, setState] = useState(initialState)
   const { modalStore } = useStore()
+  const { positions } = useGeoPosition()
+
 
   const onHandleChange = (evt: any) => {
     const { name, value } = evt.target
@@ -52,7 +54,7 @@ const SearchForm: React.FC<IProps> = observer(props => {
     )
   }
   const arrayRandomTemperature = () => {
-    let temp = []
+    let temp: number[] = []
     for (let i = 0; i <= 7; i += 1) {
       temp.push(getRandomTemperature())
     }
@@ -60,7 +62,7 @@ const SearchForm: React.FC<IProps> = observer(props => {
   }
 
   const getTimeForChart = () => {
-    let tempForChart = []
+    let tempForChart: (number | string)[] = []
     let correntTime = wheatherStore.forecast[0]?.dt
     if (wheatherStore.forecast[0]?.dt) {
       for (let i = 0; i <= 7; i += 1) {
@@ -109,11 +111,24 @@ const SearchForm: React.FC<IProps> = observer(props => {
         </div>
       </div>
       <WeatherList />
-      {modalStore.modal ? (
+      {modalStore.modal && wheatherStore.forecast[0] ? (
         <Modal>
           <WeatherList />
         </Modal>
       ) : null}
+
+      <button
+        type="button"
+        className={styles.geolocation}
+        onClick={() =>
+          wheatherStore.fetchForecastByLocation(
+            positions?.latitude,
+            positions?.longitude
+          )
+        }
+      >
+        UseCerrentGeolocation
+      </button>
     </>
   )
 })
