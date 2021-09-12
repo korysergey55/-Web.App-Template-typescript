@@ -42,10 +42,17 @@ export interface IWeather {
 }
 
 export interface Employees {
-  [key: string]: number[]
+  [key: string]: readonly (number|string|boolean)[]
 }
 const mployees: Employees  = {
   mango: [6,8,3,5,7],
   poly: [6,8,3,5,7],
-  ajax: [6,8,3,5,7],
+  ajax: ["6","8","3","5","7"],
+  alex: [true,false]
+}
+
+type  AddFn = (a: number, b: number) => number;
+
+const addNumbers: AddFn = (a, b) => {
+return a + b 
 }

@@ -23,7 +23,6 @@ const SearchForm: React.FC<IProps> = observer(props => {
   const { modalStore } = useStore()
   const { positions } = useGeoPosition()
 
-
   const onHandleChange = (evt: any) => {
     const { name, value } = evt.target
     setState(prev => ({ ...prev, [name]: value }))
@@ -43,11 +42,11 @@ const SearchForm: React.FC<IProps> = observer(props => {
     recetForm()
   }
 
-  const recetForm: any = () => {
+  const recetForm: () => void = () => {
     setState({ sity: '' })
   }
 
-  const getRandomTemperature = (min = 0, max = 37) => {
+  const getRandomTemperature = (min: number = 0, max: number = 37) => {
     return (
       Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min))) +
       Math.ceil(min)
@@ -76,6 +75,14 @@ const SearchForm: React.FC<IProps> = observer(props => {
     }
 
     return tempForChart.reverse()
+  }
+
+  const getSubmitGeolocation = () => {
+    wheatherStore.fetchForecastByLocation(
+      positions?.latitude,
+      positions?.longitude
+    )
+    modalStore.setModal()
   }
 
   return (
@@ -110,7 +117,7 @@ const SearchForm: React.FC<IProps> = observer(props => {
           </Select>
         </div>
       </div>
-      <WeatherList />
+      {/* <WeatherList /> */}
       {modalStore.modal && wheatherStore.forecast[0] ? (
         <Modal>
           <WeatherList />
@@ -120,12 +127,7 @@ const SearchForm: React.FC<IProps> = observer(props => {
       <button
         type="button"
         className={styles.geolocation}
-        onClick={() =>
-          wheatherStore.fetchForecastByLocation(
-            positions?.latitude,
-            positions?.longitude
-          )
-        }
+        onClick={() => getSubmitGeolocation()}
       >
         UseCerrentGeolocation
       </button>
