@@ -39,20 +39,20 @@ const SearchForm: React.FC<IProps> = observer(props => {
     wheatherStore.setRandonTemp(arrayRandomTemperature())
     wheatherStore.setTimeChart(getTimeForChart())
     modalStore.setModal()
-    recetForm()
+    // recetForm()
   }
 
   const recetForm: () => void = () => {
     setState({ sity: '' })
   }
 
-  const getRandomTemperature = (min: number = 0, max: number = 37) => {
-    return (
-      Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min))) +
-      Math.ceil(min)
-    )
-  }
   const arrayRandomTemperature = () => {
+    const getRandomTemperature = (min: number = 0, max: number = 37) => {
+      return (
+        Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min))) +
+        Math.ceil(min)
+      )
+    }
     let temp: number[] = []
     for (let i = 0; i <= 7; i += 1) {
       temp.push(getRandomTemperature())
@@ -82,6 +82,8 @@ const SearchForm: React.FC<IProps> = observer(props => {
       positions?.latitude,
       positions?.longitude
     )
+    wheatherStore.setRandonTemp(arrayRandomTemperature())
+    wheatherStore.setTimeChart(getTimeForChart())
     modalStore.setModal()
   }
 
@@ -95,7 +97,7 @@ const SearchForm: React.FC<IProps> = observer(props => {
             name="sity"
             value={state.sity}
             onChange={onHandleChange}
-            placeholder="Enter city name"
+            placeholder="City name..."
           />
           <button onClick={handleSubmitForm} className={styles.buttonSubmit}>
             Add
@@ -117,7 +119,7 @@ const SearchForm: React.FC<IProps> = observer(props => {
           </Select>
         </div>
       </div>
-      {/* <WeatherList /> */}
+      <WeatherList />
       {modalStore.modal && wheatherStore.forecast[0] ? (
         <Modal>
           <WeatherList />
