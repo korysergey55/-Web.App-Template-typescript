@@ -9,9 +9,9 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1200;
- }
- 
- .Modal {
+}
+
+.Modal {
   position: relative;
   min-width: 900px;
   min-height: 300px;
@@ -22,8 +22,8 @@
   background-color: white;
   border-radius: 15px;
   overflow-y: auto;
- }
- .closeModal {
+}
+.closeModal {
   position: absolute;
   top: 2%;
   left: 8%;
@@ -32,10 +32,9 @@
   background-color: red;
   color: white;
   border-radius: 10px;
- }
- .closeModal:hover {
-   cursor: pointer;
+}
+.closeModal:hover {
+  cursor: pointer;
   background-color: red;
-  color: white;
- }
- 
+  color: rgb(5, 5, 5);
+}

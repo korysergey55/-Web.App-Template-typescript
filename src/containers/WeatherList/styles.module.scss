@@ -38,10 +38,12 @@
   letter-spacing: 0px;
   color: #c5c5c5;
   opacity: 1;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
-.weatherDiscription::first-letter {
-  text-transform: uppercase;
-}
+
 .date {
   margin-bottom: 10px;
 }
@@ -62,6 +64,7 @@
   position: absolute;
   top: 64%;
   left: 25%;
+  background-color: transparent;
 }
 .buttonCelciy {
   border: none;
@@ -71,10 +74,12 @@
   letter-spacing: 0px;
   background: #fff1fe 0% 0% no-repeat padding-box;
   opacity: 1;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
-.buttonCelciy:hover {
-  cursor: pointer;
-}
+
 .buttonFaringeit {
   border: none;
   text-align: left;
@@ -82,10 +87,12 @@
   letter-spacing: 0px;
   background: #fff1fe 0% 0% no-repeat padding-box;
   opacity: 1;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
-.buttonFaringeit:hover {
-  cursor: pointer;
-}
+
 .temperatureFellsLike {
   margin-bottom: 0;
   text-align: left;
@@ -122,7 +129,7 @@
   color: #8d8d8d;
 }
 
-.activCelciy{
+.activCelciy {
   border: none;
   border-right: 1px solid #8d8d8d;
   text-align: left;

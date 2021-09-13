@@ -36,6 +36,13 @@ class Weather {
   @action setTimeChart(time: any) {
     this.timeChart = time
   }
+  // @action updateWeather(temp: any) {
+  //   if (this.forecast.length) {
+  //     this.forecast = [
+  //       { ...this.forecast[0], main: { ...this.forecast[0].main,  temp } },
+  //     ]
+  //   }
+  // }
 
   @action async fetchForecast(sity: string) {
     const response = await api.get(`/weather`, {
@@ -53,10 +60,11 @@ class Weather {
     this.forecast = [newForecastApi]
   }
 
-  @action fetchForecastByLocation(lat: number,  lon: number ) {
+  @action async fetchForecastByLocation(lat: number, lon: number) {
     const REACT_API_KEY = 'b32058f10fd03c991cd00d5d3d9b95f9'
-    const BASE_URL_WEATHER_BY_LOCATION = 'https://api.openweathermap.org/data/2.5/'
-     axios
+    const BASE_URL_WEATHER_BY_LOCATION =
+      'https://api.openweathermap.org/data/2.5/'
+    await axios
       .get(
         `${BASE_URL_WEATHER_BY_LOCATION}weather?lat=${lat}&lon=${lon}&appid=${REACT_API_KEY}`
       )

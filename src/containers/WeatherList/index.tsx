@@ -15,15 +15,26 @@ const WeatherList = observer(() => {
     setInitialTemp(forecast)
   }, [forecast])
 
-  const [temp, setTemp] = useState<number | string>(0)
+  const [temp, setTemp] = useState <number | string>(0)
   const [activClass, setActivClass] = useState(false)
 
   const setInitialTemp = (forecast: any) => {
-    if (forecast[0] && forecast[0].main) {
-      const res: number = parseFloat(forecast[0].main?.temp)
-      setTemp(res.toFixed(0))
+    if (forecast[0] && forecast[0].main.temp > 50) {
+      const res: number|string = parseFloat(forecast[0].main?.temp)
+      const convert: number = (res - 32) * (5 / 9) - 121
+      setTemp(convert.toFixed(0))
     }
+     else if (forecast[0] && forecast[0].main) {
+      const res: number|string = parseFloat(forecast[0].main?.temp).toFixed(0)
+      setTemp(res)
+    }
+
+    // if (forecast[0] && forecast[0].main) {
+    //   const res: any = parseFloat(forecast[0].main?.temp).toFixed(0)
+    //   setTemp(res)
+    // }
   }
+  
   const changeTemperageFaringate = (item: any) => {
     const res: number = parseFloat(item.main.temp) * (9 / 5) + 32
     setTemp(res.toFixed(0))
@@ -38,7 +49,7 @@ const WeatherList = observer(() => {
   return (
     <>
       {forecast.length
-        ? forecast?.map((item: any, index: number) => {
+        ? forecast?.map((item: any) => {
             return (
               <div className={styles.weatherMainContainer} key={item.id}>
                 <div className={styles.weatherListContainer}>
@@ -68,11 +79,17 @@ const WeatherList = observer(() => {
                 <div className={styles.buttonsContainer}>
                   <button
                     onClick={() => changeTemperageCelciy(item)}
-                    className={ activClass ? styles.buttonCelciy : styles.activCelciy}
-                  > &deg;C
+                    className={
+                      activClass ? styles.buttonCelciy : styles.activCelciy
+                    }
+                  >
+                    {' '}
+                    &deg;C
                   </button>
                   <button
-                    className={activClass ? styles.activ : styles.buttonFaringeit }
+                    className={
+                      activClass ? styles.activ : styles.buttonFaringeit
+                    }
                     onClick={() => changeTemperageFaringate(item)}
                   >
                     &deg;F
