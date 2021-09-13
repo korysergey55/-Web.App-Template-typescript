@@ -17,13 +17,13 @@ interface IProps {
   handleChange?: () => void
 }
 
-const SearchForm: React.FC<IProps> = observer((props) => {
+const SearchForm: React.FC<IProps> = observer(props => {
   const { wheatherStore } = useStore()
   const [state, setState] = useState(initialState)
   const { modalStore } = useStore()
   const { positions } = useGeoPosition()
 
-  const onHandleChange = (evt:any ) => {
+  const onHandleChange = (evt: any) => {
     const { name, value } = evt.target
     setState(prev => ({ ...prev, [name]: value }))
   }
@@ -33,21 +33,25 @@ const SearchForm: React.FC<IProps> = observer((props) => {
     wheatherStore.fetchForecast(state.sity)
   }
 
+  const defaultCity: ()=>void = () =>{
+   if(state.sity){
+     return
+   } else {
+    setState({sity:'kiev'})
+   }
+   return
+  }
+
   const handleSubmitForm = (evt: { preventDefault: () => void }) => {
     evt.preventDefault()
-    wheatherStore.fetchForecast(state.sity)
+    defaultCity()
+    wheatherStore.fetchForecast(state.sity? state.sity : 'kiev')
     wheatherStore.setRandonTemp(arrayRandomTemperature())
     wheatherStore.setTimeChart(getTimeForChart())
     modalStore.setModal()
-    // recetForm()
-  }
-
-  const recetForm: () => void = () => {
-    setState({ sity: '' })
   }
 
   const arrayRandomTemperature = () => {
-    
     const getRandomTemperature = (min: number = 0, max: number = 37) => {
       return (
         Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min))) +
@@ -62,7 +66,7 @@ const SearchForm: React.FC<IProps> = observer((props) => {
   }
 
   const getTimeForChart = () => {
-    let tempForChart: (number | string)[] = []
+    let tempForChart: string[] = []
     let correntTime = wheatherStore.forecast[0]?.dt
     if (wheatherStore.forecast[0]?.dt) {
       for (let i = 0; i <= 7; i += 1) {
@@ -78,7 +82,12 @@ const SearchForm: React.FC<IProps> = observer((props) => {
     return tempForChart.reverse()
   }
 
+  const formReset = () => {
+    setState({sity:''})
+  }
+
   const getSubmitGeolocation = () => {
+    formReset()
     wheatherStore.fetchForecastByLocation(
       positions?.latitude,
       positions?.longitude

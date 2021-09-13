@@ -15,13 +15,13 @@ const WeatherList = observer(() => {
     setInitialTemp(forecast)
   }, [forecast])
 
-  const [temp, setTemp] = useState <number | string>(0)
-  const [activClass, setActivClass] = useState(false)
+  const [temp, setTemp] = useState <number | string> (0)
+  const [activClass, setActivClass] = useState <boolean> (false)
 
   const setInitialTemp = (forecast: any) => {
     if (forecast[0] && forecast[0].main.temp > 50) {
       const res: number|string = parseFloat(forecast[0].main?.temp)
-      const convert: number = (res - 32) * (5 / 9) - 121
+      const convert = (res - 32) * (5 / 9) - 121
       setTemp(convert.toFixed(0))
     }
      else if (forecast[0] && forecast[0].main) {
@@ -34,7 +34,7 @@ const WeatherList = observer(() => {
     //   setTemp(res)
     // }
   }
-  
+
   const changeTemperageFaringate = (item: any) => {
     const res: number = parseFloat(item.main.temp) * (9 / 5) + 32
     setTemp(res.toFixed(0))

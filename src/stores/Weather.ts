@@ -13,10 +13,10 @@ import {
 import axios from 'axios'
 
 class Weather {
-  @observable lenguage = ''
+  @observable lenguage: string = ''
   @observable forecast: Array<IWeather> = []
-  @observable randonTemp = []
-  @observable timeChart = []
+  @observable randonTemp: number[] = []
+  @observable timeChart: string[] = []
 
   constructor() {
     makeAutoObservable(this)
@@ -25,15 +25,13 @@ class Weather {
       _ => console.log(toJS(this.forecast))
     )
   }
-
   @action setLenguage(lenguage: string) {
     this.lenguage = lenguage
   }
-
-  @action setRandonTemp(randonTemp: any) {
+  @action setRandonTemp(randonTemp: number[]) {
     this.randonTemp = randonTemp
   }
-  @action setTimeChart(time: any) {
+  @action setTimeChart(time: string[]) {
     this.timeChart = time
   }
   // @action updateWeather(temp: any) {
@@ -70,8 +68,10 @@ class Weather {
       )
       .then(response => response.data)
       .then(newForecastByLocationApi => {
+        console.log(newForecastByLocationApi)
         this.setForecast(newForecastByLocationApi)
       })
+      
   }
 }
 export default new Weather()
